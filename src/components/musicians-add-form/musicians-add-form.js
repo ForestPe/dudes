@@ -1,15 +1,14 @@
 import { Component } from 'react';
 
-import './musicians-add-form.css';
+import './musicians-add-form.scss';
 
 class MusiciansAddForm extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            name: '',
-            salary: ''
-        }
+
+    state = {
+        name: '',
+        salary: ''
     }
+
 
     onValueChange = (e) => {
         this.setState({
@@ -19,11 +18,14 @@ class MusiciansAddForm extends Component {
 
     onSubmit = (e) => {
         e.preventDefault();
-        this.props.onAdd(this.state.name, this.state.salary);
-        this.setState({
-            name: '',
-            salary: ''
-        })
+        if (this.state.name && this.state.salary && this.state.name.length > 3) {
+            this.props.onAdd(this.state.name, this.state.salary);
+            this.setState({
+                name: '',
+                salary: ''
+            })
+        }
+
     }
 
     render() {
@@ -47,7 +49,6 @@ class MusiciansAddForm extends Component {
                         name='salary'
                         value={salary}
                         onChange={this.onValueChange}/>
-    
                     <button type='submit'
                             className='btn btn-outline-light'>Добавить</button>
                 </form>

@@ -1,8 +1,8 @@
 import MusiciansListItem from '../musicians-list-item/musicians-list-item';
 
-import './musicians-list.css';
+import './musicians-list.scss';
 
-const MusiciansList = ({data, onDelete}) => {
+const MusiciansList = ({data, onDelete, onToggleProp}) => {
 
     const elements = data.map(item => {
         const {id, ...itemProps} = item;
@@ -10,8 +10,9 @@ const MusiciansList = ({data, onDelete}) => {
             <MusiciansListItem 
                 key={id}
                 {...itemProps}
-                onDelete={() => onDelete(id)}/>
-        )
+                onDelete={() => onDelete(id)}
+                onToggleProp={(e) => onToggleProp(id, e.currentTarget.getAttribute('data-toggle'))}/>
+        )   
     })
 
     return(
